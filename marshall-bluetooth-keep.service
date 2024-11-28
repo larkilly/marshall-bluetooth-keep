@@ -1,0 +1,10 @@
+[Unit]
+Description=Marshall Bluetooth Keep Service
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/marshall-bluetooth-keep
+
+[Install]
+WantedBy=default.target

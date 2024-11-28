@@ -1,0 +1,6 @@
+# meta
+/*.code-workspace
+
+# folder
+/build
+/backup
