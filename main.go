@@ -36,14 +36,17 @@ func playSilentAudioService(ctx context.Context, duration time.Duration, interva
 	silence := generators.Silence(-1)
 
 	ticker := time.NewTicker(interval)
+	defer ticker.Stop()
+
+	done := make(chan bool)
+	defer close(done)
+
 	for {
 		select {
 		case <-ctx.Done():
-			ticker.Stop()
 			return nil
 
 		case <-ticker.C:
-			done := make(chan bool)
 			speaker.Play(beep.Seq(beep.Take(sr.N(duration), silence), beep.Callback(func() {
 				done <- true
 			})))
